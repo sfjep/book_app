@@ -8,11 +8,28 @@ use Illuminate\Http\Request;
 
 class BookController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $books = DB::table('books_rated')->get();
+        // Get query parameters for filtering
+        $author = $request->query('author');
+        $title = $request->query('title');
+
+        // Start a new query
+        $query = DB::table('books_rated');
+
+        // Add conditions to the query if the parameters are present
+        if (!empty($author)) {
+            $query->where('author', 'like', '%' . $author . '%');
+        }
+        if (!empty($title)) {
+            $query->where('title', 'like', '%' . $title . '%');
+        }
+
+        // Execute the query and return the results
+        $books = $query->get();
         return response()->json($books);
     }
+
 
     public function show($isbn)
     {

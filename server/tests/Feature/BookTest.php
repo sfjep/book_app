@@ -112,4 +112,77 @@ class BookTest extends TestCase
             'isbn' => (string) $book->isbn
         ]);
     }
+
+    public function test_books_can_be_filtered_by_author()
+{
+    // Create three books
+    $book1 = Book::factory()->create([
+        'author' => 'Author 1',
+    ]);
+    $book2 = Book::factory()->create([
+        'author' => 'Author 2',
+    ]);
+    $book3 = Book::factory()->create([
+        'author' => 'Author 1',
+    ]);
+
+    // Make a GET request to the API to filter by 'Author 1'
+    $response = $this->get('/api/books?author=Author 1');
+
+    // Assert that the response status is 200 OK
+    $response->assertStatus(200);
+
+    // Assert that the response contains the two books by 'Author 1'
+    $response->assertJsonFragment([
+        'isbn' => (string) $book1->isbn,
+        'author' => $book1->author,
+    ]);
+    $response->assertJsonFragment([
+        'isbn' => (string) $book3->isbn,
+        'author' => $book3->author,
+    ]);
+
+    // Assert that the response does not contain the book by 'Author 2'
+    $response->assertJsonMissing([
+        'isbn' => (string) $book2->isbn,
+        'author' => $book2->author,
+    ]);
+}
+public function test_books_can_be_filtered_by_title()
+{
+    // Create three books
+    $book1 = Book::factory()->create([
+        'title' => 'Title 1',
+    ]);
+    $book2 = Book::factory()->create([
+        'title' => 'Title 2',
+    ]);
+    $book3 = Book::factory()->create([
+        'title' => 'Title 1',
+    ]);
+
+    // Make a GET request to the API to filter by 'Title 1'
+    $response = $this->get('/api/books?title=Title 1');
+
+    // Assert that the response status is 200 OK
+    $response->assertStatus(200);
+
+    // Assert that the response contains the two books with 'Title 1'
+    $response->assertJsonFragment([
+        'isbn' => (string) $book1->isbn,
+        'title' => $book1->title,
+    ]);
+    $response->assertJsonFragment([
+        'isbn' => (string) $book3->isbn,
+        'title' => $book3->title,
+    ]);
+
+    // Assert that the response does not contain the book with 'Title 2'
+    $response->assertJsonMissing([
+        'isbn' => (string) $book2->isbn,
+        'title' => $book2->title,
+    ]);
+}
+
+
 }
