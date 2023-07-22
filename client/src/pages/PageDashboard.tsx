@@ -4,7 +4,7 @@ import { APIConfig } from "../constants/APIConfig";
 import NewBookButton from "../components/NewButton";
 import { Layout } from "../constants";
 import BookshelfHeader from "../components/BookshelfHeader";
-// import Bookshelf from "../components/Bookshelf";
+import Bookshelf from "../components/Bookshelf";
 import { DataGrid, GridRenderCellParams } from "@mui/x-data-grid";
 import DeleteButton from "../components/DeleteButton";
 import EditButton from "../components/EditButton";
@@ -75,26 +75,31 @@ const PageDashboard = () => {
     >
       <div style={{ paddingBottom: Layout.standardPaddingLarge }}>
         <BookshelfHeader />
-        <TextField
-          label="Seach Title/Author"
-          value={searchTerm}
-          onChange={handleSearch}
-          style={{ marginBottom: "10px" }}
-          InputProps={{
-            endAdornment: <SearchIcon />,
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
           }}
-        />
-        <NewBookButton />
+        >
+          <div>
+            <TextField
+              label="Search Title/Author"
+              value={searchTerm}
+              onChange={handleSearch}
+              style={{ flexGrow: 1 }}
+              InputProps={{
+                endAdornment: <SearchIcon />,
+              }}
+            />
+          </div>
+          <div>
+            <NewBookButton />
+          </div>
+        </div>
       </div>
       <div style={{ height: 800 }}>
-        {/* <Bookshelf books={books} /> */}
-        <DataGrid
-          rows={filteredBooks}
-          columns={columns}
-          checkboxSelection={false}
-          density="standard"
-          getRowId={(row) => row.isbn}
-        />
+        <Bookshelf books={filteredBooks} />
       </div>
     </div>
   );

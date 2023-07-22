@@ -9,9 +9,10 @@ type DeleteButtonProps = {
 };
 
 const DeleteButton = ({ isbn }: DeleteButtonProps) => {
-  const { setIsDeleteBookDialogOpen } = useDialogContext();
+  const { setIsDeleteBookDialogOpen, setDeletingBook } = useDialogContext();
 
   const handleClick = () => {
+    setDeletingBook(isbn);
     setIsDeleteBookDialogOpen(true);
   };
 

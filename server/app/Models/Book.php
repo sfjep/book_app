@@ -14,7 +14,7 @@ class Book extends Model
     public $incrementing = false; // 'isbn' is not autoincrementing
     protected $keyType = 'string';  // 'isbn' is treated as a string
     protected $fillable = ['isbn', 'title', 'author', 'publication_year', 'publisher', 'image_url_s', 'image_url_m', 'image_url_l'];
-    public $timestamps = false; # Makes sure Laravel doesn't add updated_at and created_at cols
+    public $timestamps = false; // Makes sure Laravel doesn't add updated_at and created_at cols
 
     public function ratings()
     {

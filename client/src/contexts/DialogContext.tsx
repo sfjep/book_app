@@ -17,6 +17,8 @@ type DialogContextType = {
   setIsEditBookDialogOpen: Dispatch<SetStateAction<boolean>>;
   editingBook: Book | null;
   setEditingBook: Dispatch<SetStateAction<Book | null>>;
+  deletingBook: string | null;
+  setDeletingBook: Dispatch<SetStateAction<string | null>>;
 };
 
 export const DialogContext = createContext<DialogContextType | undefined>(
@@ -32,6 +34,7 @@ export const DialogProvider = ({ children }: Props) => {
   const [isDeleteBookDialogOpen, setIsDeleteBookDialogOpen] = useState(false);
   const [isEditBookDialogOpen, setIsEditBookDialogOpen] = useState(false);
   const [editingBook, setEditingBook] = useState<Book | null>(null);
+  const [deletingBook, setDeletingBook] = useState<string | null>(null);
 
   return (
     <DialogContext.Provider
@@ -44,6 +47,8 @@ export const DialogProvider = ({ children }: Props) => {
         setIsEditBookDialogOpen,
         editingBook,
         setEditingBook,
+        deletingBook,
+        setDeletingBook,
       }}
     >
       {children}

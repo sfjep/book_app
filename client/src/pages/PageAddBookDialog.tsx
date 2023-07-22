@@ -19,7 +19,9 @@ const PageAddBookDialog = () => {
     author: "",
     publication_year: "",
     publisher: "",
-    // other fields here...
+    image_url_s: "",
+    image_url_m: "",
+    image_url_l: "",
   });
 
   const { isAddBookDialogOpen, setIsAddBookDialogOpen } = useDialogContext();
@@ -104,7 +106,16 @@ const PageAddBookDialog = () => {
           value={newBook.publisher}
           onChange={handleInputChange}
         />
-        {/* Add other fields here as you create them */}
+        <TextField
+          margin="dense"
+          name="image_url_s"
+          label="Image URL Small"
+          type="text"
+          fullWidth
+          variant="standard"
+          value={newBook.image_url_s}
+          onChange={handleInputChange}
+        />
       </DialogContent>
       <DialogActions>
         <Button onClick={handleAdd}>Add</Button>

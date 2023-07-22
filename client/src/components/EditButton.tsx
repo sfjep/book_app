@@ -22,6 +22,7 @@ const EditButton = ({ bookData }: EditButtonProps) => {
       variant="contained"
       style={{ ...FontConfig.Button, backgroundColor: Colors.secondary }}
       onClick={handleClick}
+      size="small"
     >
       Edit
     </Button>

@@ -6,16 +6,19 @@ import { APIConfig } from "../constants/APIConfig";
 import { useDialogContext } from "../contexts/DialogContext";
 
 const PageDeleteBook = () => {
-  const { isbn } = useParams();
-  const { isDeleteBookDialogOpen, setIsDeleteBookDialogOpen } =
+  const { isDeleteBookDialogOpen, setIsDeleteBookDialogOpen, deletingBook } =
     useDialogContext();
 
   const handleConfirmDelete = async () => {
+    console.log("Trying to delete");
+    console.log("isbn", deletingBook);
     try {
       await axios.delete(
-        `${APIConfig.baseURL}${APIConfig.endpoints.deleteBook(isbn!)}`
+        `${APIConfig.baseURL}${APIConfig.endpoints.deleteBook(deletingBook)}`
       );
+      console.log("Deleted");
       setIsDeleteBookDialogOpen(false);
+      window.location.reload();
     } catch (error) {
       console.error("An error occurred while deleting the book:", error);
     }
