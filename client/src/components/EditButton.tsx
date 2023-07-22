@@ -1,18 +1,31 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { Button } from "@mui/material";
+import { FontConfig } from "../constants";
+import { Colors } from "../constants/Colors";
+import { useDialogContext } from "../contexts/DialogContext";
+import { Book } from "../types/Book";
 
 type EditButtonProps = {
-  isbn: string;
+  bookData: Book;
 };
 
-const EditButton = ({ isbn }: EditButtonProps) => {
-  const navigate = useNavigate();
+const EditButton = ({ bookData }: EditButtonProps) => {
+  const { setIsEditBookDialogOpen, setEditingBook } = useDialogContext();
 
-  const handleEditClick = () => {
-    navigate(`/edit/${isbn}`);
+  const handleClick = () => {
+    setEditingBook(bookData);
+    setIsEditBookDialogOpen(true);
   };
 
-  return <button onClick={handleEditClick}>Edit</button>;
+  return (
+    <Button
+      variant="contained"
+      style={{ ...FontConfig.Button, backgroundColor: Colors.secondary }}
+      onClick={handleClick}
+    >
+      Edit
+    </Button>
+  );
 };
 
 export default EditButton;

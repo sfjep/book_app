@@ -1,24 +1,27 @@
-import React, { useEffect, useState, useMemo } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { APIConfig } from "../constants/APIConfig";
+import NewBookButton from "../components/NewButton";
+import { Layout } from "../constants";
+import BookshelfHeader from "../components/BookshelfHeader";
+// import Bookshelf from "../components/Bookshelf";
 import { DataGrid, GridRenderCellParams } from "@mui/x-data-grid";
-import EditButton from "../components/EditButton";
 import DeleteButton from "../components/DeleteButton";
-
-interface Book {
-  isbn: string;
-  title: string;
-  author: string;
-  publication_year: string;
-  publisher: string;
-  avg_rating: number;
-  num_ratings: number;
-}
+import EditButton from "../components/EditButton";
+import useFilteredBooks from "../hooks/useFilteredBooks";
+import { TextField } from "@mui/material";
+import SearchIcon from "@mui/icons-material/Search";
+import { RatedBook } from "../types/Book";
 
 const PageDashboard = () => {
   console.log("PageDashboard rendered");
 
-  const [books, setBooks] = useState<Book[]>([]);
+  const [books, setBooks] = useState<RatedBook[]>([]);
+  const [searchTerm, setSearchTerm] = useState("");
+
+  const handleSearch = (e) => {
+    setSearchTerm(e.target.value);
+  };
 
   useEffect(() => {
     const fetchBooks = async () => {
@@ -36,42 +39,63 @@ const PageDashboard = () => {
     fetchBooks();
   }, []);
 
+  let filteredBooks: RatedBook[] = useFilteredBooks(books, searchTerm);
+
   const columns = [
-    { field: "isbn", headerName: "ISBN", width: 200 },
-    { field: "title", headerName: "Title", width: 200 },
-    { field: "author", headerName: "Author", width: 200 },
-    { field: "publication_year", headerName: "Publication Year", width: 200 },
-    { field: "publisher", headerName: "Publisher", width: 200 },
-    { field: "avg_rating", headerName: "Average Rating", width: 200 },
-    { field: "num_ratings", headerName: "Number of Ratings", width: 200 },
+    { field: "isbn", headerName: "ISBN", flex: 1 },
+    { field: "title", headerName: "Title", flex: 2 },
+    { field: "author", headerName: "Author", flex: 2 },
+    { field: "publication_year", headerName: "Publication Year", flex: 1 },
+    { field: "publisher", headerName: "Publisher", flex: 2 },
+    { field: "avg_rating", headerName: "Average Rating", flex: 1 },
+    { field: "num_ratings", headerName: "Number of Ratings", flex: 1 },
     {
       field: "edit",
-      headerName: "Edit",
-      width: 130,
-      sortable: false,
+      headerName: "",
+      flex: 1,
       renderCell: (params: GridRenderCellParams) => (
-        <EditButton isbn={params.row.isbn} />
+        <EditButton bookData={params.row} />
       ),
     },
     {
       field: "delete",
-      headerName: "Delete",
-      width: 130,
-      sortable: false,
+      headerName: "",
+      flex: 1,
       renderCell: (params: GridRenderCellParams) => (
         <DeleteButton isbn={params.row.isbn} />
       ),
     },
   ];
-
   return (
-    <div style={{ height: 400, width: "100%" }}>
-      <DataGrid
-        rows={books}
-        columns={columns}
-        checkboxSelection={false}
-        getRowId={(row) => row.isbn}
-      />
+    <div
+      style={{
+        paddingLeft: Layout.standardPaddingLarge,
+        paddingRight: Layout.standardPaddingLarge,
+      }}
+    >
+      <div style={{ paddingBottom: Layout.standardPaddingLarge }}>
+        <BookshelfHeader />
+        <TextField
+          label="Seach Title/Author"
+          value={searchTerm}
+          onChange={handleSearch}
+          style={{ marginBottom: "10px" }}
+          InputProps={{
+            endAdornment: <SearchIcon />,
+          }}
+        />
+        <NewBookButton />
+      </div>
+      <div style={{ height: 800 }}>
+        {/* <Bookshelf books={books} /> */}
+        <DataGrid
+          rows={filteredBooks}
+          columns={columns}
+          checkboxSelection={false}
+          density="standard"
+          getRowId={(row) => row.isbn}
+        />
+      </div>
     </div>
   );
 };

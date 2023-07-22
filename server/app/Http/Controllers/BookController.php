@@ -58,7 +58,10 @@ class BookController extends Controller
             'title' => 'required',
             'author' => 'required',
             'publication_year' => 'required',
-            'publisher' => 'required'
+            'publisher' => 'required',
+            'image_url_s' => 'nullable',
+            'image_url_m' => 'nullable',
+            'image_url_l' => 'nullable',
         ]);
 
         $book = Book::where('isbn', $isbn)->first();

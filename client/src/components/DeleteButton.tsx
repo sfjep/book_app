@@ -1,18 +1,29 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { Button } from "@mui/material";
+import { FontConfig } from "../constants";
+import { Colors } from "../constants/Colors";
+import { useDialogContext } from "../contexts/DialogContext";
 
 type DeleteButtonProps = {
   isbn: string;
 };
 
 const DeleteButton = ({ isbn }: DeleteButtonProps) => {
-  const navigate = useNavigate();
+  const { setIsDeleteBookDialogOpen } = useDialogContext();
 
-  const handleDeleteClick = () => {
-    navigate(`/delete/${isbn}`);
+  const handleClick = () => {
+    setIsDeleteBookDialogOpen(true);
   };
 
-  return <button onClick={handleDeleteClick}>Delete</button>;
+  return (
+    <Button
+      onClick={handleClick}
+      style={{ ...FontConfig.Button, backgroundColor: Colors.secondary }}
+      variant="contained"
+    >
+      Delete
+    </Button>
+  );
 };
 
 export default DeleteButton;

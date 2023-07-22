@@ -1,0 +1,3 @@
+.dialog-root .MuiDialog-paper {
+  backdrop-filter: blur(2px);
+}
