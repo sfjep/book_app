@@ -41,7 +41,6 @@ const App = () => {
             element={<PageDashboard books={books} setBooks={setBooks} />}
           />
           <Route path="/author/:name" element={<PageAuthor />} />
-          {/* Add other routes here as you create them */}
         </Routes>
       </Router>
     </DialogProvider>
