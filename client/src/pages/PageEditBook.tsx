@@ -1,5 +1,5 @@
 // PageEditBook.tsx
-import React, { ChangeEvent, useContext, useState, useEffect } from "react";
+import React, { ChangeEvent, useState, useEffect } from "react";
 import {
   Dialog,
   DialogTitle,
@@ -14,7 +14,7 @@ import { Book } from "../types/Book";
 import axios from "axios";
 import { APIConfig } from "../constants/APIConfig";
 
-const PageEditBook = () => {
+const PageEditBook = ({ books, setBooks }) => {
   const { isEditBookDialogOpen, setIsEditBookDialogOpen, editingBook } =
     useDialogContext();
 
@@ -35,16 +35,6 @@ const PageEditBook = () => {
 
   const handleSubmit = async () => {
     if (bookData) {
-      const updatedBookData: Book = {
-        isbn: bookData.isbn,
-        title: bookData.title,
-        author: bookData.author,
-        publication_year: bookData.publication_year,
-        publisher: bookData.publisher,
-        image_url_s: bookData.image_url_s,
-        image_url_m: bookData.image_url_m,
-        image_url_l: bookData.image_url_l,
-      };
       try {
         await axios.put(
           `${APIConfig.baseURL}${APIConfig.endpoints.updateBook(
@@ -52,7 +42,9 @@ const PageEditBook = () => {
           )}`,
           bookData
         );
-        window.location.reload();
+        setBooks(
+          books.map((book) => (book.isbn === bookData.isbn ? bookData : book))
+        );
       } catch (error) {
         console.error(error.response);
       }
@@ -156,4 +148,4 @@ const PageEditBook = () => {
   );
 };
 
-export default PageEditBook;
+export default React.memo(PageEditBook);

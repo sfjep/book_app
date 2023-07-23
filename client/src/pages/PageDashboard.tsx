@@ -1,71 +1,24 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
-import { APIConfig } from "../constants/APIConfig";
-import NewBookButton from "../components/NewButton";
-import { Layout } from "../constants";
-import BookshelfHeader from "../components/BookshelfHeader";
-import Bookshelf from "../components/Bookshelf";
-import { DataGrid, GridRenderCellParams } from "@mui/x-data-grid";
-import DeleteButton from "../components/DeleteButton";
-import EditButton from "../components/EditButton";
-import useFilteredBooks from "../hooks/useFilteredBooks";
+import React, { useState } from "react";
 import { TextField } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
+import NewBookButton from "../components/NewButton";
+import BookshelfHeader from "../components/BookshelfHeader";
+import Bookshelf from "../components/Bookshelf";
+import useFilteredBooks from "../hooks/useFilteredBooks";
 import { RatedBook } from "../types/Book";
+import { Layout } from "../constants";
 
-const PageDashboard = () => {
+const PageDashboard = ({ books, setBooks }) => {
   console.log("PageDashboard rendered");
 
-  const [books, setBooks] = useState<RatedBook[]>([]);
   const [searchTerm, setSearchTerm] = useState("");
 
   const handleSearch = (e) => {
     setSearchTerm(e.target.value);
   };
 
-  useEffect(() => {
-    const fetchBooks = async () => {
-      try {
-        const response = await axios.get(
-          `${APIConfig.baseURL}${APIConfig.endpoints.getAllBooks}`
-        );
-        setBooks(response.data);
-        console.log("books", response.data);
-      } catch (error) {
-        console.error("An error occurred while fetching the books:", error);
-      }
-    };
-
-    fetchBooks();
-  }, []);
-
   let filteredBooks: RatedBook[] = useFilteredBooks(books, searchTerm);
 
-  const columns = [
-    { field: "isbn", headerName: "ISBN", flex: 1 },
-    { field: "title", headerName: "Title", flex: 2 },
-    { field: "author", headerName: "Author", flex: 2 },
-    { field: "publication_year", headerName: "Publication Year", flex: 1 },
-    { field: "publisher", headerName: "Publisher", flex: 2 },
-    { field: "avg_rating", headerName: "Average Rating", flex: 1 },
-    { field: "num_ratings", headerName: "Number of Ratings", flex: 1 },
-    {
-      field: "edit",
-      headerName: "",
-      flex: 1,
-      renderCell: (params: GridRenderCellParams) => (
-        <EditButton bookData={params.row} />
-      ),
-    },
-    {
-      field: "delete",
-      headerName: "",
-      flex: 1,
-      renderCell: (params: GridRenderCellParams) => (
-        <DeleteButton isbn={params.row.isbn} />
-      ),
-    },
-  ];
   return (
     <div
       style={{
@@ -105,4 +58,4 @@ const PageDashboard = () => {
   );
 };
 
-export default PageDashboard;
+export default React.memo(PageDashboard);

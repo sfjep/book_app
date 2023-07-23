@@ -12,7 +12,7 @@ import { APIConfig } from "../constants/APIConfig";
 import { useDialogContext } from "../contexts/DialogContext";
 import "../styles/DialogOverlay.css";
 
-const PageAddBookDialog = () => {
+const PageAddBookDialog = ({ books, setBooks }) => {
   const [newBook, setNewBook] = useState({
     isbn: "",
     title: "",
@@ -37,10 +37,11 @@ const PageAddBookDialog = () => {
 
   const handleAdd = async () => {
     try {
-      await axios.post(
+      const response = await axios.post(
         `${APIConfig.baseURL}${APIConfig.endpoints.createBook}`,
         newBook
       );
+      setBooks([...books, response.data]);
       setIsAddBookDialogOpen(false);
     } catch (error) {
       console.error("An error occurred while adding the book:", error);
@@ -125,4 +126,4 @@ const PageAddBookDialog = () => {
   );
 };
 
-export default PageAddBookDialog;
+export default React.memo(PageAddBookDialog);

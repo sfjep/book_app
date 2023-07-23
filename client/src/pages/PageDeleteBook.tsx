@@ -1,24 +1,20 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Dialog, DialogTitle, DialogActions, Button } from "@mui/material";
-import { useParams } from "react-router-dom";
 import axios from "axios";
 import { APIConfig } from "../constants/APIConfig";
 import { useDialogContext } from "../contexts/DialogContext";
 
-const PageDeleteBook = () => {
+const PageDeleteBook = ({ books, setBooks }) => {
   const { isDeleteBookDialogOpen, setIsDeleteBookDialogOpen, deletingBook } =
     useDialogContext();
 
   const handleConfirmDelete = async () => {
-    console.log("Trying to delete");
-    console.log("isbn", deletingBook);
     try {
       await axios.delete(
         `${APIConfig.baseURL}${APIConfig.endpoints.deleteBook(deletingBook)}`
       );
-      console.log("Deleted");
+      setBooks(books.filter((book) => book.isbn !== deletingBook));
       setIsDeleteBookDialogOpen(false);
-      window.location.reload();
     } catch (error) {
       console.error("An error occurred while deleting the book:", error);
     }
@@ -45,4 +41,4 @@ const PageDeleteBook = () => {
   );
 };
 
-export default PageDeleteBook;
+export default React.memo(PageDeleteBook);
