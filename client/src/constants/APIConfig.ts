@@ -1,5 +1,5 @@
 export const APIConfig = {
-  baseURL: "http://localhost:8000/api", //replace with your Laravel API URL
+  baseURL: "http://localhost:8000/api",
   endpoints: {
     getAllBooks: "/books",
     getBook: (isbn: string) => `/books/${isbn}`,
