@@ -2,10 +2,10 @@ import React from "react";
 import { Button } from "@mui/material";
 import { FontConfig, Colors } from "../constants";
 import { useDialogContext } from "../contexts/DialogContext";
-import { Book } from "../types/Book";
+import { RatedBook } from "../types/Book";
 
 type EditButtonProps = {
-  bookData: Book;
+  bookData: RatedBook;
 };
 
 const EditButton = ({ bookData }: EditButtonProps) => {

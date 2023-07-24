@@ -25,7 +25,7 @@ export const deleteBook = createAsyncThunk<string, string>(
   "books/deleteBook",
   async (isbn) => {
     await axios.delete(
-      `${APIConfig.baseURL}${APIConfig.endpoints.deleteBook}/${isbn}`
+      `${APIConfig.baseURL}${APIConfig.endpoints.deleteBook(isbn)}`
     );
     return isbn;
   }
@@ -36,7 +36,7 @@ export const editBook = createAsyncThunk<RatedBook, RatedBook>(
   "books/editBook",
   async (book) => {
     const response = await axios.put<RatedBook>(
-      `${APIConfig.baseURL}${APIConfig.endpoints.updateBook}/${book.isbn}`,
+      `${APIConfig.baseURL}${APIConfig.endpoints.updateBook(book.isbn)}`,
       book
     );
     return response.data;

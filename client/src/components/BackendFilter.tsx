@@ -1,27 +1,19 @@
-// components/Filter.tsx
-
 import React, { useState } from "react";
 import { Button, TextField, Box } from "@mui/material";
-import axios from "axios";
-import { FontConfig, Colors, APIConfig } from "../constants";
+import { FontConfig, Colors } from "../constants";
+import { useAppDispatch } from "../redux/hooks";
+import { fetchBooks } from "../redux/books/booksSlice";
 
-const BackendFilter = ({ setBooks }) => {
+const BackendFilter = () => {
+  const dispatch = useAppDispatch();
   const [authorFilter, setAuthorFilter] = useState("");
   const [titleFilter, setTitleFilter] = useState("");
 
-  const filterBooksBackend = async () => {
+  // Filter by querying all books with potential for author and title filtering
+  const filterBooksBackend = () => {
     try {
       console.log("Filtering");
-      const response = await axios.get(
-        APIConfig.baseURL + APIConfig.endpoints.getAllBooks,
-        {
-          params: {
-            author: authorFilter,
-            title: titleFilter,
-          },
-        }
-      );
-      setBooks(response.data);
+      dispatch(fetchBooks({ author: authorFilter, title: titleFilter }));
     } catch (error) {
       console.error("An error occurred while fetching the books:", error);
     }

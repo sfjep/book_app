@@ -6,7 +6,7 @@ import React, {
   SetStateAction,
   useContext,
 } from "react";
-import { Book } from "../types/Book";
+import { RatedBook } from "../types/Book";
 
 type DialogContextType = {
   isAddBookDialogOpen: boolean;
@@ -15,8 +15,8 @@ type DialogContextType = {
   setIsDeleteBookDialogOpen: Dispatch<SetStateAction<boolean>>;
   isEditBookDialogOpen: boolean;
   setIsEditBookDialogOpen: Dispatch<SetStateAction<boolean>>;
-  editingBook: Book | null;
-  setEditingBook: Dispatch<SetStateAction<Book | null>>;
+  editingBook: RatedBook | null;
+  setEditingBook: Dispatch<SetStateAction<RatedBook | null>>;
   deletingBook: string | null;
   setDeletingBook: Dispatch<SetStateAction<string | null>>;
 };
@@ -33,7 +33,7 @@ export const DialogProvider = ({ children }: Props) => {
   const [isAddBookDialogOpen, setIsAddBookDialogOpen] = useState(false);
   const [isDeleteBookDialogOpen, setIsDeleteBookDialogOpen] = useState(false);
   const [isEditBookDialogOpen, setIsEditBookDialogOpen] = useState(false);
-  const [editingBook, setEditingBook] = useState<Book | null>(null);
+  const [editingBook, setEditingBook] = useState<RatedBook | null>(null);
   const [deletingBook, setDeletingBook] = useState<string | null>(null);
 
   return (

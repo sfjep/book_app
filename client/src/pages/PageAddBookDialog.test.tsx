@@ -28,7 +28,7 @@ describe("PageAddBookDialog", () => {
   test("renders correctly", () => {
     render(
       <DialogContext.Provider value={contextValue}>
-        <PageAddBookDialog books={[]} setBooks={setBooks} />
+        <PageAddBookDialog />
       </DialogContext.Provider>
     );
 
@@ -56,7 +56,7 @@ describe("PageAddBookDialog", () => {
 
     render(
       <DialogContext.Provider value={contextValue}>
-        <PageAddBookDialog books={[]} setBooks={setBooks} />
+        <PageAddBookDialog />
       </DialogContext.Provider>
     );
 

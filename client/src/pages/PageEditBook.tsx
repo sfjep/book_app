@@ -1,4 +1,3 @@
-// PageEditBook.tsx
 import React, { ChangeEvent, useState, useEffect } from "react";
 import {
   Dialog,
@@ -10,16 +9,19 @@ import {
   Box,
 } from "@mui/material";
 import { useDialogContext } from "../contexts/DialogContext";
-import { Book } from "../types/Book";
-import axios from "axios";
-import { APIConfig, Colors, FontConfig, Layout } from "../constants";
+import { RatedBook } from "../types/Book";
+import { Colors, FontConfig, Layout } from "../constants";
+import { useAppDispatch } from "../redux/hooks";
+import { editBook } from "../redux/books/booksSlice";
 
-const PageEditBook = ({ books, setBooks }) => {
+const PageEditBook = () => {
   const { isEditBookDialogOpen, setIsEditBookDialogOpen, editingBook } =
     useDialogContext();
 
+  const dispatch = useAppDispatch();
+
   // Using React state to handle the form inputs
-  const [bookData, setBookData] = useState<Book | null>(null);
+  const [bookData, setBookData] = useState<RatedBook | null>(null);
 
   // Populate bookData state when editingBook changes
   useEffect(() => {
@@ -36,20 +38,12 @@ const PageEditBook = ({ books, setBooks }) => {
   const handleSubmit = async () => {
     if (bookData) {
       try {
-        await axios.put(
-          `${APIConfig.baseURL}${APIConfig.endpoints.updateBook(
-            bookData.isbn
-          )}`,
-          bookData
-        );
-        setBooks(
-          books.map((book) => (book.isbn === bookData.isbn ? bookData : book))
-        );
+        await dispatch(editBook(bookData));
+        setIsEditBookDialogOpen(false);
       } catch (error) {
-        console.error(error.response);
+        console.error("An error occurred while updating the book:", error);
       }
     }
-    setIsEditBookDialogOpen(false);
   };
 
   return (

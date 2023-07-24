@@ -1,19 +1,22 @@
 import React from "react";
 import { Dialog, DialogTitle, DialogActions, Button } from "@mui/material";
-import axios from "axios";
-import { APIConfig, Colors, FontConfig } from "../constants";
+import { useAppDispatch } from "../redux/hooks";
+import { deleteBook } from "../redux/books/booksSlice";
+import { Colors, FontConfig } from "../constants";
 import { useDialogContext } from "../contexts/DialogContext";
 
-const PageDeleteBook = ({ books, setBooks }) => {
+const PageDeleteBook = () => {
   const { isDeleteBookDialogOpen, setIsDeleteBookDialogOpen, deletingBook } =
     useDialogContext();
 
+  // useAppDispatch is used to dispatch actions to our Redux store.
+  const dispatch = useAppDispatch();
+
   const handleConfirmDelete = async () => {
     try {
-      await axios.delete(
-        `${APIConfig.baseURL}${APIConfig.endpoints.deleteBook(deletingBook)}`
-      );
-      setBooks(books.filter((book) => book.isbn !== deletingBook));
+      if (deletingBook !== null) {
+        await dispatch(deleteBook(deletingBook));
+      }
       setIsDeleteBookDialogOpen(false);
     } catch (error) {
       console.error("An error occurred while deleting the book:", error);

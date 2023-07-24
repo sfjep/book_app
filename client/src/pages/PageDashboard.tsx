@@ -1,5 +1,4 @@
 // pages/PageDashboard.tsx
-
 import React, { useState } from "react";
 import { Layout } from "../constants";
 import {
@@ -10,12 +9,20 @@ import {
   Sort,
   NewBookButton,
 } from "../components";
+import { useAppSelector } from "../redux/hooks";
 import { RatedBook } from "../types/Book";
 import useFilteredBooks from "../hooks/useFilteredBooks";
 
-const PageDashboard = ({ books, setBooks }) => {
+const PageDashboard = () => {
   const [searchTerm, setSearchTerm] = useState("");
+
+  // useAppSelector is used to access data from our Redux store,
+  const books = useAppSelector((state) => state.books);
+
+  // Filter books by search term
   let filteredBooks: RatedBook[] = useFilteredBooks(books, searchTerm);
+
+  // Set sorted books state
   const [sortedBooks, setSortedBooks] = useState(filteredBooks);
 
   return (
@@ -35,7 +42,7 @@ const PageDashboard = ({ books, setBooks }) => {
           }}
         >
           <Search setSearchTerm={setSearchTerm} />
-          <BackendFilter setBooks={setBooks} />
+          <BackendFilter />
           <Sort filteredBooks={filteredBooks} setSortedBooks={setSortedBooks} />
           <NewBookButton />
         </div>

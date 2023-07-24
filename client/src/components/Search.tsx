@@ -1,11 +1,13 @@
-// components/Search.tsx
-
-import React from "react";
+import React, { ChangeEvent, Dispatch, SetStateAction } from "react";
 import { TextField } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 
-const Search = ({ setSearchTerm }) => {
-  const handleSearch = (e) => {
+interface SearchProps {
+  setSearchTerm: Dispatch<SetStateAction<string>>;
+}
+
+const Search = ({ setSearchTerm }: SearchProps) => {
+  const handleSearch = (e: ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(e.target.value);
   };
 

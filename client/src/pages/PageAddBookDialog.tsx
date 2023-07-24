@@ -7,12 +7,12 @@ import {
   TextField,
   Button,
 } from "@mui/material";
-import axios from "axios";
-import { APIConfig } from "../constants";
 import { useDialogContext } from "../contexts/DialogContext";
 import "../styles/DialogOverlay.css";
+import { useAppDispatch } from "../redux";
+import { addBook } from "../redux/books/booksSlice";
 
-const PageAddBookDialog = ({ books, setBooks }) => {
+const PageAddBookDialog = () => {
   const [newBook, setNewBook] = useState({
     isbn: "",
     title: "",
@@ -26,6 +26,8 @@ const PageAddBookDialog = ({ books, setBooks }) => {
 
   const { isAddBookDialogOpen, setIsAddBookDialogOpen } = useDialogContext();
 
+  const dispatch = useAppDispatch();
+
   const handleClose = () => {
     setIsAddBookDialogOpen(false);
   };
@@ -37,11 +39,7 @@ const PageAddBookDialog = ({ books, setBooks }) => {
 
   const handleAdd = async () => {
     try {
-      const response = await axios.post(
-        `${APIConfig.baseURL}${APIConfig.endpoints.createBook}`,
-        newBook
-      );
-      setBooks([...books, response.data]);
+      await dispatch(addBook(newBook));
       setIsAddBookDialogOpen(false);
     } catch (error) {
       console.error("An error occurred while adding the book:", error);

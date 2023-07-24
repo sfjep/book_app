@@ -10,6 +10,6 @@ export type Book = {
 };
 
 export interface RatedBook extends Book {
-  avg_rating: number;
-  num_ratings: number;
+  avg_rating?: number;
+  num_ratings?: number;
 }
