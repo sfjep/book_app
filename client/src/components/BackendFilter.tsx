@@ -12,7 +12,6 @@ const BackendFilter = () => {
   // Filter by querying all books with potential for author and title filtering
   const filterBooksBackend = () => {
     try {
-      console.log("Filtering");
       dispatch(fetchBooks({ author: authorFilter, title: titleFilter }));
     } catch (error) {
       console.error("An error occurred while fetching the books:", error);
