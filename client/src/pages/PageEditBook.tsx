@@ -12,7 +12,7 @@ import {
 import { useDialogContext } from "../contexts/DialogContext";
 import { Book } from "../types/Book";
 import axios from "axios";
-import { APIConfig } from "../constants/APIConfig";
+import { APIConfig } from "../constants";
 
 const PageEditBook = ({ books, setBooks }) => {
   const { isEditBookDialogOpen, setIsEditBookDialogOpen, editingBook } =

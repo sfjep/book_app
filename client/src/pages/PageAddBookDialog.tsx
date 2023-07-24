@@ -8,7 +8,7 @@ import {
   Button,
 } from "@mui/material";
 import axios from "axios";
-import { APIConfig } from "../constants/APIConfig";
+import { APIConfig } from "../constants";
 import { useDialogContext } from "../contexts/DialogContext";
 import "../styles/DialogOverlay.css";
 

@@ -1,15 +1,17 @@
 // App.tsx
 import React, { useEffect, useState } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import PageDashboard from "./pages/PageDashboard";
-import PageDeleteBook from "./pages/PageDeleteBook";
-import PageAddBookDialog from "./pages/PageAddBookDialog";
-import PageEditBook from "./pages/PageEditBook";
-import PageAuthor from "./pages/PageAuthor";
+import {
+  PageDashboard,
+  PageDeleteBook,
+  PageAddBookDialog,
+  PageEditBook,
+  PageAuthor,
+} from "./pages";
 import { DialogProvider } from "./contexts/DialogContext";
 import { Book } from "./types/Book";
 import axios from "axios";
-import { APIConfig } from "./constants/APIConfig";
+import { APIConfig } from "./constants";
 
 const App = () => {
   const [books, setBooks] = useState<Book[]>([]);

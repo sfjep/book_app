@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import { Button, TextField, Box } from "@mui/material";
 import axios from "axios";
-import { APIConfig } from "../constants/APIConfig";
+import { FontConfig, Colors, APIConfig } from "../constants";
 
 const BackendFilter = ({ setBooks }) => {
   const [authorFilter, setAuthorFilter] = useState("");
@@ -46,8 +46,12 @@ const BackendFilter = ({ setBooks }) => {
       <Box marginLeft={2}>
         <Button
           variant="contained"
-          color="primary"
           onClick={filterBooksBackend}
+          style={{
+            ...FontConfig.Button,
+            backgroundColor: Colors.primary,
+            width: 200,
+          }}
         >
           Filter Books (BE)
         </Button>

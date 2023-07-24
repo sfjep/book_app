@@ -1,5 +1,4 @@
-import { FontConfig } from "../constants";
-import { Colors } from "../constants/Colors";
+import { FontConfig, Colors } from "../constants";
 
 const BookshelfHeader = () => {
   return (

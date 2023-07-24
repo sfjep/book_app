@@ -1,7 +1,6 @@
 import React from "react";
 import { Button } from "@mui/material";
-import { FontConfig } from "../constants";
-import { Colors } from "../constants/Colors";
+import { FontConfig, Colors } from "../constants";
 import { useDialogContext } from "../contexts/DialogContext";
 import { Book } from "../types/Book";
 

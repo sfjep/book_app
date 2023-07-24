@@ -2,12 +2,14 @@
 
 import React, { useState } from "react";
 import { Layout } from "../constants";
-import NewBookButton from "../components/NewButton";
-import BookshelfHeader from "../components/BookshelfHeader";
-import Bookshelf from "../components/Bookshelf";
-import Search from "../components/Search";
-import BackendFilter from "../components/BackendFilter";
-import Sort from "../components/Sort";
+import {
+  BookshelfHeader,
+  Bookshelf,
+  Search,
+  BackendFilter,
+  Sort,
+  NewBookButton,
+} from "../components";
 import { RatedBook } from "../types/Book";
 import useFilteredBooks from "../hooks/useFilteredBooks";
 

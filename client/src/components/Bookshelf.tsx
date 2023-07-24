@@ -1,8 +1,8 @@
+import { Link } from "react-router-dom";
 import { DataGrid, GridRenderCellParams, GridColDef } from "@mui/x-data-grid";
 import EditButton from "./EditButton";
 import DeleteButton from "./DeleteButton";
 import { RatedBook } from "../types/Book";
-import { Link } from "react-router-dom";
 
 const Bookshelf = ({ books }: { books: RatedBook[] }) => {
   const columns: GridColDef[] = [

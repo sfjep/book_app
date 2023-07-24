@@ -38,4 +38,4 @@ const PageAuthor = () => {
   );
 };
 
-export default PageAuthor;
+export default React.memo(PageAuthor);

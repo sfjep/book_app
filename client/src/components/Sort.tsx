@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState, useCallback } from "react";
 import { Button, Select, MenuItem } from "@mui/material";
+import { Colors, FontConfig } from "../constants";
 
 const Sort = ({ filteredBooks, setSortedBooks }) => {
   const [primarySort, setPrimarySort] = useState({
@@ -97,7 +98,11 @@ const Sort = ({ filteredBooks, setSortedBooks }) => {
       <Button
         variant="contained"
         onClick={resetSort}
-        style={{ marginLeft: 10 }}
+        style={{
+          ...FontConfig.Button,
+          backgroundColor: Colors.primary,
+          width: 200,
+        }}
       >
         Reset Sort
       </Button>

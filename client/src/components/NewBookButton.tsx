@@ -1,7 +1,6 @@
 import React from "react";
 import { Button } from "@mui/material";
-import { FontConfig, Layout } from "../constants";
-import { Colors } from "../constants/Colors";
+import { FontConfig, Layout, Colors } from "../constants";
 import { useDialogContext } from "../contexts/DialogContext";
 
 const NewBookButton = () => {
