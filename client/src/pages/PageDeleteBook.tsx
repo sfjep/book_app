@@ -1,7 +1,7 @@
 import React from "react";
 import { Dialog, DialogTitle, DialogActions, Button } from "@mui/material";
 import axios from "axios";
-import { APIConfig } from "../constants";
+import { APIConfig, Colors, FontConfig } from "../constants";
 import { useDialogContext } from "../contexts/DialogContext";
 
 const PageDeleteBook = ({ books, setBooks }) => {
@@ -30,12 +30,27 @@ const PageDeleteBook = ({ books, setBooks }) => {
       onClose={handleCancel}
       className="dialog-overlay"
     >
-      <DialogTitle>Are you sure that you want to delete this book?</DialogTitle>
+      <DialogTitle
+        style={{ ...FontConfig.Heading2, color: Colors.textPrimary }}
+      >
+        Delete Book
+      </DialogTitle>
+      <DialogTitle style={{ ...FontConfig.BodyLarge }}>
+        Are you sure that you want to delete this book?
+      </DialogTitle>
       <DialogActions>
-        <Button color="secondary" onClick={handleConfirmDelete}>
+        <Button
+          style={{ ...FontConfig.BodyMedium, color: Colors.primary }}
+          onClick={handleConfirmDelete}
+        >
           Delete
         </Button>
-        <Button onClick={handleCancel}>Cancel</Button>
+        <Button
+          style={{ ...FontConfig.BodyMedium, color: Colors.secondary }}
+          onClick={handleCancel}
+        >
+          Cancel
+        </Button>
       </DialogActions>
     </Dialog>
   );

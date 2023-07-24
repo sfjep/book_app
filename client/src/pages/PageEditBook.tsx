@@ -12,7 +12,7 @@ import {
 import { useDialogContext } from "../contexts/DialogContext";
 import { Book } from "../types/Book";
 import axios from "axios";
-import { APIConfig } from "../constants";
+import { APIConfig, Colors, FontConfig, Layout } from "../constants";
 
 const PageEditBook = ({ books, setBooks }) => {
   const { isEditBookDialogOpen, setIsEditBookDialogOpen, editingBook } =
@@ -59,7 +59,11 @@ const PageEditBook = ({ books, setBooks }) => {
       fullWidth
       maxWidth="md"
     >
-      <DialogTitle>Edit Book</DialogTitle>
+      <DialogTitle
+        style={{ ...FontConfig.Heading2, color: Colors.textPrimary }}
+      >
+        Edit Book
+      </DialogTitle>
       <DialogContent>
         {bookData && (
           <>
@@ -139,10 +143,26 @@ const PageEditBook = ({ books, setBooks }) => {
         )}
       </DialogContent>
       <DialogActions>
-        <Button onClick={handleSubmit} color="primary">
+        <Button
+          onClick={handleSubmit}
+          style={{
+            ...FontConfig.Button,
+            color: Colors.primary,
+            padding: Layout.standardPaddingLarge,
+          }}
+        >
           Confirm
         </Button>
-        <Button onClick={() => setIsEditBookDialogOpen(false)}>Cancel</Button>
+        <Button
+          style={{
+            ...FontConfig.Button,
+            color: Colors.secondary,
+            padding: Layout.standardPaddingLarge,
+          }}
+          onClick={() => setIsEditBookDialogOpen(false)}
+        >
+          Cancel
+        </Button>
       </DialogActions>
     </Dialog>
   );
