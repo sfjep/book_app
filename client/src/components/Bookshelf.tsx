@@ -65,6 +65,7 @@ const Bookshelf = ({ books }: { books: RatedBook[] }) => {
       field: "edit",
       headerName: "",
       flex: 1,
+      align: "center",
       renderCell: (params: GridRenderCellParams) => (
         <EditButton bookData={params.row} />
       ),
@@ -73,6 +74,7 @@ const Bookshelf = ({ books }: { books: RatedBook[] }) => {
       field: "delete",
       headerName: "",
       flex: 1,
+      align: "center",
       renderCell: (params: GridRenderCellParams) => (
         <DeleteButton isbn={params.row.isbn} />
       ),
