@@ -1,3 +1,5 @@
+// This file provides a context (global state) to manage the visibility of dialogs in the application.
+// It is also used to keep track of which book is currently being edited or deleted.
 import React, {
   createContext,
   useState,
@@ -21,10 +23,12 @@ type DialogContextType = {
   setDeletingBook: Dispatch<SetStateAction<string | null>>;
 };
 
+// DialogContext is used by components to access the context state.
 export const DialogContext = createContext<DialogContextType | undefined>(
   undefined
 );
 
+// This represents the children components which will be wrapped by the provider
 type Props = {
   children: ReactNode;
 };
@@ -36,6 +40,7 @@ export const DialogProvider = ({ children }: Props) => {
   const [editingBook, setEditingBook] = useState<RatedBook | null>(null);
   const [deletingBook, setDeletingBook] = useState<string | null>(null);
 
+  // The context provider component provides all the states and set functions to its children.
   return (
     <DialogContext.Provider
       value={{
@@ -56,6 +61,7 @@ export const DialogProvider = ({ children }: Props) => {
   );
 };
 
+// This hook provides a shorthand for accessing the context.
 export const useDialogContext = () => {
   const context = useContext(DialogContext);
   if (!context) {

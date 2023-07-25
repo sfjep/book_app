@@ -1,10 +1,11 @@
 import { Select, MenuItem } from "@mui/material";
 
-const SortMenu = ({ value, onChange }) => {
+const SortMenu = ({ value, onChange, label }) => {
   return (
     <Select
       value={value}
       onChange={(e) => onChange(e.target.value)}
+      aria-label={label}
       style={{ marginRight: 20 }}
     >
       <MenuItem value="None">None</MenuItem>

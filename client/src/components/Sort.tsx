@@ -61,12 +61,14 @@ const Sort = ({ filteredBooks, setSortedBooks }) => {
       <SortMenu
         value={primarySort.field}
         onChange={(value) => setPrimarySort({ ...primarySort, field: value })}
+        label="Primary Sort"
       />
       <SortMenu
         value={secondarySort.field}
         onChange={(value) =>
           setSecondarySort({ ...secondarySort, field: value })
         }
+        label="Secondary Sort"
       />
       <Button
         variant="contained"
