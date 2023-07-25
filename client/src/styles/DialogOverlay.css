@@ -1,3 +1,4 @@
+/* When opening dialog, blur the background a little */
 .dialog-root .MuiDialog-paper {
   backdrop-filter: blur(2px);
 }

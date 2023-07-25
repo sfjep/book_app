@@ -2,9 +2,9 @@ import React, { useEffect } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import {
   PageDashboard,
-  PageDeleteBook,
+  PageDeleteBookDialog,
   PageAddBookDialog,
-  PageEditBook,
+  PageEditBookDialog,
   PageAuthor,
 } from "./pages";
 import { DialogProvider } from "./contexts/DialogContext";
@@ -21,8 +21,8 @@ const App = () => {
   return (
     <DialogProvider>
       <PageAddBookDialog />
-      <PageDeleteBook />
-      <PageEditBook />
+      <PageDeleteBookDialog />
+      <PageEditBookDialog />
       <Router>
         <Routes>
           <Route path="/" element={<PageDashboard />} />
