@@ -22,7 +22,7 @@ class BookFactory extends Factory
     public function definition()
     {
         return [
-            'isbn' => $this->faker->unique()->randomNumber(9, true),
+            'isbn' => $this->faker->unique()->randomNumber(9, true), // strict=true to get num digits == 9, not < 9
             'title' => $this->faker->sentence(),
             'author' => $this->faker->name(),
             'publication_year' => $this->faker->year(),
