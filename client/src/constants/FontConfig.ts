@@ -46,7 +46,7 @@ export const FontConfig: FontConfigSystem = {
   },
   Link: {
     fontFamily: FontFamily.Medium,
-    fontSize: 12,
+    fontSize: 14,
     lineHeight: 2,
     spacing: 0,
     padding: 0,

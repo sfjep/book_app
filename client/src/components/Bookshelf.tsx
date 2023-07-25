@@ -3,6 +3,7 @@ import { DataGrid, GridRenderCellParams, GridColDef } from "@mui/x-data-grid";
 import EditButton from "./EditButton";
 import DeleteButton from "./DeleteButton";
 import { RatedBook } from "../types/Book";
+import { FontConfig } from "../constants";
 
 const Bookshelf = ({ books }: { books: RatedBook[] }) => {
   const columns: GridColDef[] = [
@@ -36,7 +37,12 @@ const Bookshelf = ({ books }: { books: RatedBook[] }) => {
       headerName: "Author",
       flex: 2,
       renderCell: (params: GridRenderCellParams) => (
-        <Link to={`/author/${params.row.author}`}>{params.row.author}</Link>
+        <Link
+          style={{ ...FontConfig.Link }}
+          to={`/author/${params.row.author}`}
+        >
+          {params.row.author}
+        </Link>
       ),
     },
     { field: "publisher", headerName: "Publisher", flex: 2 },
